@@ -3,7 +3,11 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Howdy Sesh-head!<br/><a href='/seshmaster/about/'>About Us  |  </a><a href='/seshmaster/sitemap/'>Sitemap  |  </a><a href='/seshmaster/contact'>  Contact</a>")
+
+    context_dict = {'boldmessage': "hey!"}
+
+    return render(request,'seshmaster/index.html', context=context_dict)
+
 
 def about(request):
     return HttpResponse("About Us<a href='/seshmaster/'>Home</a>")
