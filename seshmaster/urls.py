@@ -1,9 +1,9 @@
 from django.conf.urls import url
-from rango import views
+from seshmaster import views
 
 urlpatterns = [
 url(r'^$', views.index, name='index'),
-url(r'contactus/', views.contactus, name='contactus'),
+url(r'contact/', views.contact, name='contact'),
 url(r'signup/', views.signup, name='signup'),
 url(r'login/', views.login, name='login'),
 url(r'nightclubbrowse/', views.nightclubbrowse, name='nightclubbrowse'),
