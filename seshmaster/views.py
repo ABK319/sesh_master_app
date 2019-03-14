@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from seshmaster.forms import nightclub_form 
 
 def index(request):
 
@@ -60,10 +61,21 @@ def myreviews(request):
 	return render(request, 'seshmaster/myaccount/myreviews.html')
 	
 	
-def mynightclubs(request):
-	
-	
-	return render(request, 'seshmaster/mynightclubs.html')
+def addlocation(request):
+
+        form = nightclub_form
+
+        if request.method == "POST":
+                form= nightclub_form(request.POST)
+
+                if form.is_valid():
+                        form.save(commit=True)
+                        return index(request)
+
+                else:
+                        print(form.errors)
+
+        return render(request, 'seshmaster/mynightclubs.html',{'form': form})
 	
 	
 	

@@ -9,7 +9,8 @@ url(r'login/', views.login, name='login'),
 url(r'nightclubbrowse/', views.nightclubbrowse, name='nightclubbrowse'),
 url(r'nightclubbrowse/nightclubpage/', views.nightclubpage, name='nightclubpage'),	
 url(r'nightclubbrowse/leavereview/', views.leavereview, name='leavereview'),	
-url(r'nightclubbrowse/rateimage/', views.rateimage, name='rateimage'),			
+url(r'nightclubbrowse/rateimage/', views.rateimage, name='rateimage'),
+url(r'addlocation/', views.addlocation, name='addlocation'),
 #url(r'/', views., name=''),						#template line
 ]
 

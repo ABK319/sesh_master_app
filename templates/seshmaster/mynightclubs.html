@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>SESHMASTER</title>
+	</head>
+	<body>
+		<h1>Add a location</h1>
+		
+		<div style="font-family:comic sans ms">
+			<form id="nightclub_form" method = "post" action= "/seshmaster/">
+				{%csrf_token%}
+				{% for hidden in form.hidden_fields %}
+					{{ hidden }} 
+				{%endfor%}
+				{% for field in form.visible_fields%}
+				<br><div>
+					{{ field.errors}}
+					{{ field.help_text}} 
+					{{field}}
+				</div>
+				{% endfor%}
+				 <button class="button button1" style = "position: absolute; bottom:300px; left:10px"> Submit </button> 
+				 
+		</div>
+			</form>
+	</body>
+</html>
