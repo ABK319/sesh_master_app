@@ -5,10 +5,24 @@
 		<title>Sign Up</title>
 	</head>
 	<body>
-		<h1>Create a new account</h1>
-		<hr>
+		<h1 style="font-family:comic sans ms">Create a new account</h1>
+		
 		<br>
+	    {% if registered %}
+			Thanks for signing up!
+			<a href="{% url 'index' %}">homepage</a><br />
+		{% else %}
+		<div style="font-family:comic sans ms">
+			<form id="user_form" method = "post" action= "/seshmaster/signup/" enctype="multipart/form-data">
+				{%csrf_token%}
+				
+				{{user_form.as_p}}
+				{{ profile_form.as_p}}
+				
+		</div>
+				<input align = "bottom" type="submit" name="submit" value="sign up" /> 
+		</form>
+		{%endif%}
 	
-		<p>placeholder text</p>
 	</body>
 </html>

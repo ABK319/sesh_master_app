@@ -3,6 +3,7 @@
 	<head> 
 
 		<title>Seshmaster</title> 
+		<link rel="stylesheet" href="menustyle.css" type="text/css" media="all" /> 
 
 	</head>
 	
@@ -12,17 +13,34 @@
 		 
 			SESHMASTER 
 			
-			<input style= "position:relative; left:120px;" type = "text" id = "name" value = "Username" />
-			<input style= "position:relative; left:130px;" type = "text" id = "pass" value = "Password" /> 
-			<input style= "position:relative; left:130px;" type = "button" id = "submit" value = "Login" /> <br>
-			<input style= "position:fixed; left:401px;" type = "button" id = "new" value = "New User?" />
+			{% if user.is_authenticated %} 
+			<div  style = "font-family:comic sans ms; font-size:50%; position:absolute; left:250px; bottom:10px"> welcome {{ user.username }}! </div>
 			
+			{% else %}
+			
+			
+			
+			<FORM id="login_form" method="post" action="/seshmaster/login/" style = " font-family:Serif; font-size:50%; position:absolute; left:250px; bottom:-15px">
+			{% csrf_token %}
+                Username:
+                <input type="text" name="username" value="" id="username" size="17" />
+				Password:
+                <input type="password" name="password" value="" id="password" size="17" />
+                <br />
+				<INPUT type="submit" name="submit" value="submit" />
+			</FORM>
+			<a href="seshmaster/signup/"> <input style= "position:absolute; left:710px; top:18px;" type = "button" id = "new" value = "New User?" /></a>
+			
+			{%endif%}
+		
+		</div>
 
-	
-		</div> 
+		<button class="button button1" style = "position: absolute; bottom:100px; left:155px">Search</button>
 		
 		<div>
+			
 			<label style = "position:absolute; bottom:250px; left:150px;  font-size: 120%; font-family:Arial Black"> Find your perfect location </ label> 
+		
 		</div>
 		
 		
@@ -31,18 +49,200 @@
 			
 			<a style = "text-decoration:none"; href="/seshmaster/about/">About  |   </a>
 			<a style = "text-decoration:none"; href="/seshmaster/sitemap/">Sitemap  |   </a>
-			<a style = "text-decoration:none"; href="/seshmaster/contact/">Contact</a>
-			<a style = "text-decoration:none"; href="/seshmaster/signup/">signup</a>
-			<a style = "text-decoration:none"; href="/seshmaster/nightclubbrowse/">nightclubbrowse</a>
-			<a style = "text-decoration:none"; href="/seshmaster/nightclubbrowse/nightclubpage/">nightclubpage</a>
-			<a style = "text-decoration:none"; href="/seshmaster/nightclubbrowse/leavereview/">leavereview</a>
-			<a style = "text-decoration:none"; href="/seshmaster/nightclubbrowse/rateimage">rateimage</a>
-			<a style = "text-decoration:none"; href="/seshmaster/myaccount/">myaccount</a>
-			<a style = "text-decoration:none"; href="/seshmaster/myaccount/myreviews/">myreviews</a>
-			<a style = "text-decoration:none"; href="/seshmaster/myaccount/mynightclubs/">mynightclubs</a>
-			
+			<a style = "text-decoration:none"; href="/seshmaster/contact/">Contact  |  </a>
+			{% if user.is_authenticated %}
+			<a style = "text-decoration:none"; href="/seshmaster/addlocation">Add location  |  </a>
+			<a style = "text-decoration:none"; href="/seshmaster/logout">logout</a>
+			{%endif%}
 		
 		</div> 
+		
+			
+		<div id="wrap">
+		
+		<ul id="trending">
+			
+			<li><a href="#">Highest Rated Spots</a></li>
+			
+			<li><a href="#">Lowest Rated Spots</a></li>
+			
+			<li><a href="#">Hottest Spots</a></li>
+			
+		
+		</div>
+			
+		
+		
+		<div id="wrapper">
+		
+		<br/><br/>
+		<ul id="Menu">
+			
+			<li><a style = href="#">Price</a>
+				<ul>
+					<li><a href="#">Sample</a></li>
+					<li><a href="#">Sample</a></li>
+				</ul>
+			</li>
+			
+			<li><a href="#">Music</a>
+				<ul>
+					<li><a href="#">Sample</a></li>
+					<li><a href="#">Sample</a></li>
+				</ul>
+			</li>
+			
+			<li><a href="#">Category</a>
+				<ul>
+					<li><a href="#">Sample</a></li>
+					<li><a href="#">Sample</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+		</div>
+		
+		
+		
+		
+
+		<style>
+		
+		div#wrapper{
+	width:700px;
+	margin: 0 auto;
+}
+
+h1{
+	text-align:center;
+}
+
+	ul#Menu{
+		margin-left:-303px;
+		margin-top: 360px;
+		background: #000000; 
+		box-shadow: 0px 0px 90px rgba(0,0,255,0.75);
+		padding: 0 10px;
+		border-radius: 20px;  
+		list-style: none;
+		position: relative;
+		display: inline-table;
+	}
+
+	ul#Menu li{
+		float: left;
+	}
+
+
+	ul#Menu li a{
+		display: block; 
+		padding: 15px 20px;
+		color: #634777; 
+		text-decoration: none;
+	}
+
+
+
+ul#Menu li ul{
+	list-style:none;
+	display:none;
+}
+
+ul#Menu:after{
+	content: ""; 
+	clear: both; 
+	display: block;
+}
+
+ul#Menu li:hover{
+		background: #634777;
+		background: linear-gradient(top, #634777 0%, #634777 40%);
+		background: -moz-linear-gradient(top, #634777 0%,#634777 40%);
+		background: -webkit-linear-gradient(top, #634777 0%,#634777 40%);
+}
+
+ul#Menu li:hover a{
+	color: #fff;
+}
+
+ul#Menu li:hover > ul{
+	display:block;
+}
+
+ul#Menu ul{
+	background: #634777; border-radius: 0px; padding: 0;
+	position: absolute; top: 100%;
+}
+
+ul#Menu ul li{
+	float: none; 
+		border-top: 1px solid #6b727c;
+		border-bottom: 1px solid #575f6a;
+		position: relative;
+}
+
+ul#Menu ul li a{
+	padding: 5px 40px;
+			color: #fff;
+}
+
+ul#Menu ul li a:hover{
+					background: #4b545f;
+}
+
+.button {
+  
+  border-radius: 12px;
+  background-color: #562989;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 250px;
+  
+  
+}
+
+div#trending{
+	width:700px;
+	margin: 0 auto;
+	
+}
+ul#trending li{
+		float: left;
+		list-style: none;
+		margin-top: 40px;
+		left: 90px;
+		background: #49754b; 
+		padding: 0 5px;
+		border-radius: 5px;  
+		list-style: none;
+		position: relative;
+		display: inline-table;
+		
+	}
+	
+ul#trending li a{
+		display: block; 
+		padding: 5px 5px;
+		color: #ffffff; 
+		text-decoration: none; 
+		
+		}
+
+ul#trending li:hover a {
+	color: #000000;
+}
+
+
+</style>
+		
+		
 	
 	</body>
 

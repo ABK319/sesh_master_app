@@ -1,0 +1,142 @@
+	div#wrapper{
+	width:700px;
+	margin: 0 auto;
+}
+
+h1{
+	text-align:center;
+}
+
+	ul#Menu{
+		margin-left:-303px;
+		margin-top: 340px;
+		background: #000000; 
+		box-shadow: 0px 0px 90px rgba(0,0,255,0.75);
+		padding: 0 10px;
+		border-radius: 20px;  
+		list-style: none;
+		position: relative;
+		display: inline-table;
+	}
+
+	ul#Menu li{
+		float: left;
+	}
+
+
+	ul#Menu li a{
+		display: block; 
+		padding: 15px 20px;
+		color: #634777; 
+		text-decoration: none;
+	}
+
+
+
+ul#Menu li ul{
+	list-style:none;
+	display:none;
+}
+
+ul#Menu:after{
+	content: ""; 
+	clear: both; 
+	display: block;
+}
+
+ul#Menu li:hover{
+		background: #634777;
+		background: linear-gradient(top, #634777 0%, #634777 40%);
+		background: -moz-linear-gradient(top, #634777 0%,#634777 40%);
+		background: -webkit-linear-gradient(top, #634777 0%,#634777 40%);
+}
+
+ul#Menu li:hover a{
+	color: #fff;
+}
+
+ul#Menu li:hover > ul{
+	display:block;
+}
+
+ul#Menu ul{
+	background: #634777; border-radius: 0px; padding: 0;
+	position: absolute; top: 100%;
+}
+
+ul#Menu ul li{
+	float: none; 
+		border-top: 1px solid #6b727c;
+		border-bottom: 1px solid #575f6a;
+		position: relative;
+}
+
+ul#Menu ul li a{
+	padding: 5px 40px;
+			color: #fff;
+}
+
+ul#Menu ul li a:hover{
+					background: #4b545f;
+}
+
+.button {
+  
+  border-radius: 12px;
+  background-color: #562989;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 250px;
+  
+  
+}
+
+div#trending{
+	width:700px;
+	margin: 0 auto;
+	
+}
+ul#trending li{
+		float: left;
+		list-style: none;
+		margin-top: 40px;
+		left: 90px;
+		background: #49754b; 
+		padding: 0 5px;
+		border-radius: 5px;  
+		list-style: none;
+		position: relative;
+		display: inline-table;
+		
+	}
+	
+ul#trending li a{
+		display: block; 
+		padding: 5px 5px;
+		color: #ffffff; 
+		text-decoration: none; 
+		
+		}
+
+ul#trending li:hover a {
+	color: #000000;
+}
+
+		position: relative;
+}
+
+ul#Menu ul li a{
+	padding: 5px 40px;
+			color: #fff;
+}
+
+ul#Menu ul li a:hover{
+					background: #4b545f;
+}
