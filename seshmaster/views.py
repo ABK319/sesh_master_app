@@ -4,7 +4,11 @@ from seshmaster.forms import nightclub_form,signup_form
 from django.contrib.auth import authenticate
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
+<<<<<<< HEAD
 from seshmaster.forms import signup_form, UserProfileForm, NightclubUserImage
+=======
+from seshmaster.forms import signup_form, UserProfileForm
+>>>>>>> e655d28cad41fab5061c8343832b51efc5071976
 
 from django.contrib import auth
 def index(request):
@@ -55,6 +59,15 @@ def signup(request):
         return render(request, 'seshmaster/signup.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 	
 	
+<<<<<<< HEAD
+=======
+	
+def login(request):
+	
+	
+	return render(request, 'seshmaster/login.html')
+	
+>>>>>>> e655d28cad41fab5061c8343832b51efc5071976
 	
 def nightclubbrowse(request):
 	
@@ -107,6 +120,7 @@ def addlocation(request):
                         print(form.errors)
 
         return render(request, 'seshmaster/addlocations.html',{'form': form})
+<<<<<<< HEAD
 	
 def user_login(request):
 
@@ -160,6 +174,38 @@ def addNCimage(request):
 		return render(request, 'seshmaster/addNCimage.html')
 #def upload_image(request):
 	
+=======
+	
+def user_login(request):
+
+        if request.method == 'POST':
+
+                username = request.POST.get('username')
+                password = request.POST.get('password')
+
+                user = authenticate(username=username, password=password)
+
+
+                if user:
+                        if user.is_active:
+
+                                auth.login(request, user) 
+
+                                return HttpResponseRedirect(reverse('index'))
+
+                        else:
+                                return HttpResponse("Your seshmaster account is inactive.")
+                else:
+                        print("Invalid login details: {0}, {1}".format(username, password))
+                        return HttpResponse("Invalid login details supplied.")
+        else:
+                return render(request,"seshmaster/login.html",{})
+
+def user_logout(request):
+
+        auth.logout(request)
+        return HttpResponseRedirect(reverse('index'))
+>>>>>>> e655d28cad41fab5061c8343832b51efc5071976
 
         
 

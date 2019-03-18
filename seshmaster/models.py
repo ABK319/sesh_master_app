@@ -38,17 +38,26 @@ class Review(models.Model):
 
     nightclub = models.ForeignKey(Nightclub)
     user = models.ForeignKey(User) 
+<<<<<<< HEAD
     score = models.CharField(max_length=10, help_text='What would you rate this nightclub?')
     Comment = models.CharField(max_length=350, help_text='What would you say about this nightclub (350 characters)')
+=======
+    score = models.CharField(max_length=10)
+    Comment = models.CharField(max_length=350)
+>>>>>>> e655d28cad41fab5061c8343832b51efc5071976
 
     def __str__(self):
         return self.score
 
+<<<<<<< HEAD
 class NCImage(models.Model):
 
     
     user = models.ForeignKey(User)
     image = models.ImageField(upload_to='images', blank=True)
 	
+=======
+
+>>>>>>> e655d28cad41fab5061c8343832b51efc5071976
 
 
