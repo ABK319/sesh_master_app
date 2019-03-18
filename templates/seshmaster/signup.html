@@ -6,9 +6,23 @@
 	</head>
 	<body>
 		<h1>Create a new account</h1>
-		<hr>
+		
 		<br>
 	
-		<p>placeholder text</p>
+		<div style="font-family:comic sans ms">
+			<form id="signup_form" method = "post" action= "/seshmaster/signup/">
+				{%csrf_token%}
+				{% for hidden in form.hidden_fields %}
+					{{ hidden }} 
+				{%endfor%}
+				{% for field in form.visible_fields%}
+				<br><div>
+					{{ field.errors}}
+					{{ field.help_text}} 
+					{{field}}
+				</div>
+				{% endfor%}
+				 <input align = "bottom" type="submit" name="submit" value="signup" /> 
+	
 	</body>
 </html>

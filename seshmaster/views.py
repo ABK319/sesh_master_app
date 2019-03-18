@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from seshmaster.forms import nightclub_form 
+from seshmaster.forms import nightclub_form,signup_form 
 
 def index(request):
 
@@ -14,9 +14,21 @@ def contact(request):
 	
 	
 def signup(request):
+
+        form = signup_form
+
+        if request.method == "POST":
+                form= signup_form(request.POST)
+
+                if form.is_valid():
+                        form.save(commit=True)
+                        return index(request)
+
+                else:
+                        print(form.errors)
+
+        return render(request, 'seshmaster/signup.html',{'form': form})
 	
-	
-	return render(request, 'seshmaster/signup.html')
 	
 	
 def login(request):
@@ -75,7 +87,7 @@ def addlocation(request):
                 else:
                         print(form.errors)
 
-        return render(request, 'seshmaster/mynightclubs.html',{'form': form})
+        return render(request, 'seshmaster/addlocations.html',{'form': form})
 	
 	
 	

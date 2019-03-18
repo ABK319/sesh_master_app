@@ -8,7 +8,7 @@
 		<h1>Add a location</h1>
 		
 		<div style="font-family:comic sans ms">
-			<form id="nightclub_form" method = "post" action= "/seshmaster/">
+			<form id="nightclub_form" method = "post" enctype="multipart/form-data" action= "/seshmaster/addlocation/">
 				{%csrf_token%}
 				{% for hidden in form.hidden_fields %}
 					{{ hidden }} 
@@ -20,7 +20,7 @@
 					{{field}}
 				</div>
 				{% endfor%}
-				 <button class="button button1" style = "position: absolute; bottom:300px; left:10px"> Submit </button> 
+				 <input type="submit" name="submit" value="addlocation" /> 
 				 
 		</div>
 			</form>
