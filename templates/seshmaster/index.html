@@ -13,11 +13,26 @@
 		 
 			SESHMASTER 
 			
-			<input style= "position:relative; left:120px;" type = "text" id = "name" value = "Username" />
-			<input style= "position:relative; left:130px;" type = "text" id = "pass" value = "Password" /> 
-			<input style= "position:relative; left:130px;" type = "button" id = "submit" value = "Login" /> <br>
-			<a href="seshmaster/signup/"> <input style= "position:fixed; left:401px;" type = "button" id = "new" value = "New User?" /></a>
+			{% if user.is_authenticated %} 
+			<div  style = "font-family:comic sans ms; font-size:50%; position:absolute; left:250px; bottom:10px"> welcome {{ user.username }}! </div>
 			
+			{% else %}
+			
+			
+			
+			<FORM id="login_form" method="post" action="/seshmaster/login/" style = " font-family:Serif; font-size:50%; position:absolute; left:250px; bottom:-15px">
+			{% csrf_token %}
+                Username:
+                <input type="text" name="username" value="" id="username" size="17" />
+				Password:
+                <input type="password" name="password" value="" id="password" size="17" />
+                <br />
+				<INPUT type="submit" name="submit" value="submit" />
+			</FORM>
+			<a href="seshmaster/signup/"> <input style= "position:absolute; left:710px; top:18px;" type = "button" id = "new" value = "New User?" /></a>
+			
+			{%endif%}
+		
 		</div>
 
 		<button class="button button1" style = "position: absolute; bottom:100px; left:155px">Search</button>
@@ -35,8 +50,10 @@
 			<a style = "text-decoration:none"; href="/seshmaster/about/">About  |   </a>
 			<a style = "text-decoration:none"; href="/seshmaster/sitemap/">Sitemap  |   </a>
 			<a style = "text-decoration:none"; href="/seshmaster/contact/">Contact  |  </a>
-			<a style = "text-decoration:none"; href="/seshmaster/addlocation">Add location</a>
-			
+			{% if user.is_authenticated %}
+			<a style = "text-decoration:none"; href="/seshmaster/addlocation">Add location  |  </a>
+			<a style = "text-decoration:none"; href="/seshmaster/logout">logout</a>
+			{%endif%}
 		
 		</div> 
 		

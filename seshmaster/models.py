@@ -1,15 +1,15 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class User(models.Model):
 
-    name = models.CharField(max_length=128, unique=True,help_text= "How should we call you?")
-    email = models.CharField(max_length=128, unique=True,help_text="How can we contact you?")
-    password = models.CharField(max_length=128,help_text= "enter password")
+class UserProfile(models.Model):
+
+    user = models.OneToOneField(User)
     picture = models.ImageField(upload_to='profile', blank=True)
 
 
     def __str__(self):
-        return self.name
+        return self.user.username
 
 class Image(models.Model):
 

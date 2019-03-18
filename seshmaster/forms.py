@@ -1,5 +1,6 @@
 from django import forms 
-from seshmaster.models import User,Image,Nightclub,Review
+from seshmaster.models import UserProfile,Image,Nightclub,Review
+from django.contrib.auth.models import User 
 
 class nightclub_form(forms.ModelForm):
 
@@ -11,6 +12,16 @@ class nightclub_form(forms.ModelForm):
 
 class signup_form(forms.ModelForm):
 
+    password = forms.CharField(widget=forms.PasswordInput())
+
+
     class Meta:
         model = User
-        fields = ("name","email","password","picture") 
+        fields = ("username","email","password")
+
+class UserProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ('picture',)
+

@@ -1,7 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from seshmaster.forms import nightclub_form,signup_form 
+from seshmaster.forms import nightclub_form,signup_form
+from django.contrib.auth import authenticate
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
+from seshmaster.forms import signup_form, UserProfileForm
 
+from django.contrib import auth
 def index(request):
 
 
@@ -15,19 +20,39 @@ def contact(request):
 	
 def signup(request):
 
-        form = signup_form
+        registered = False 
 
         if request.method == "POST":
-                form= signup_form(request.POST)
 
-                if form.is_valid():
-                        form.save(commit=True)
-                        return index(request)
+                user_form = signup_form(data=request.POST)
+                profile_form = UserProfileForm(data=request.POST)
 
-                else:
-                        print(form.errors)
 
-        return render(request, 'seshmaster/signup.html',{'form': form})
+                if user_form.is_valid() and profile_form.is_valid(): 
+
+                        user = user_form.save()
+
+                        user.set_password(user.password)
+                        user.save()
+
+                        profile = profile_form.save(commit=False)
+                        profile.user = user
+
+                        if 'picture' in request.FILES:
+                                profile.picture = request.FILES['picture']
+
+                        profile.save()
+                        registered = True
+                else: 
+                        print(user_form.errors, profile_form.errors)
+                
+        else:
+                user_form = signup_form()
+                profile_form = UserProfileForm()
+
+                
+
+        return render(request, 'seshmaster/signup.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 	
 	
 	
@@ -89,5 +114,37 @@ def addlocation(request):
 
         return render(request, 'seshmaster/addlocations.html',{'form': form})
 	
-	
+def user_login(request):
+
+        if request.method == 'POST':
+
+                username = request.POST.get('username')
+                password = request.POST.get('password')
+
+                user = authenticate(username=username, password=password)
+
+
+                if user:
+                        if user.is_active:
+
+                                auth.login(request, user) 
+
+                                return HttpResponseRedirect(reverse('index'))
+
+                        else:
+                                return HttpResponse("Your seshmaster account is inactive.")
+                else:
+                        print("Invalid login details: {0}, {1}".format(username, password))
+                        return HttpResponse("Invalid login details supplied.")
+        else:
+                return render(request,"seshmaster/login.html",{})
+
+def user_logout(request):
+
+        auth.logout(request)
+        return HttpResponseRedirect(reverse('index'))
+
+        
+
+
 	
