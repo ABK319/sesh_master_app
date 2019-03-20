@@ -1,4 +1,5 @@
 <!DOCTYPE html> 
+{% load staticfiles %} 
 <html>
 	<head> 
 
@@ -34,6 +35,8 @@
 			{%endif%}
 		
 		</div>
+		
+		
 
 		<button class="button button1" style = "position: absolute; bottom:100px; left:155px">Search</button>
 		
@@ -62,14 +65,79 @@
 		
 		<ul id="trending">
 			
-			<li><a href="#">Highest Rated Spots</a></li>
+			<li><a href="#" onclick="myFunction()">Hottest Spots</a></li>
 			
-			<li><a href="#">Lowest Rated Spots</a></li>
+				<div id = "highestrated" style =  "position:absolute; bottom:400px; left:150px;">
+				{% if spots %}
+					<div class="slideshow-container">
+					
+						
+							{% for spot in spots %}
+								<div class="mySlides fade">
+								<div class="numbertext">1 / 3</div>
+								<div class="text"style = "font-family:comic sans ms">{{spot.name}}</div>
+								<img src={{spot.img.url}} style="width:400px;height:200px;bottom:-110px; position:absolute;">
+								</div>
+							{% endfor %}
+						
+						
+						<a class="next" onclick="plusSlides(1)">&#10095;</a>
+						<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+						
+					
+					</div>
+					<br>
+					
+					
+					
+					
+				
+				{% else %}
+					<strong>OOOOOPS no locations currently. </strong>
+				{%endif%}
+				</div>
 			
-			<li><a href="#">Hottest Spots</a></li>
+			<li><a  onclick="myFunctionOne()">Info</a></li>
+			<div id = "score" style = " display:none; position:absolute; bottom:300px; left:150px; font-family:comic sans ms">
+
+				{% if spots %}
+				
+					{% for spot in spots %}
+					
+						
+							{{spot.name}} : {{spot.average_score}}/5 &emsp;&emsp;&emsp; Price: {{spot.price}} &emsp;&emsp;&emsp; Music: {{spot.music_genre}}<br><br><br>
+						
+					{%endfor%}
+				
+				
+				{%else%}
+					<strong> Something went wrong </strong>
+				{%endif%}
+					
 			
-		
+			
+			</div>
 		</div>
+		
+			<div>
+				
+				<form id="search-form_3" action="/seshmaster/search/" method="GET" value="{{request.GET.q}}">
+				
+					<input style = "position:absolute; bottom:460px; right:40%" type="text" name="q" value="{{request.GET.q}}" placeholder="Search Spot by Name"class="search_3"/>
+					<input  style = "position:absolute; bottom:465px; right:40%;" type="submit" name="submit" value="Search" class="submit_3"/>
+				</form>
+				
+				<form id="search-form_3" action="/seshmaster/images/" method="GET" value="{{result.name}}">
+				
+					<input style = "position:absolute; bottom:350px; right:40%; " type="text" name="q" value="{{result.name}}" placeholder="Browse Images by location"class="search_3"/>
+					<input  style = "position:absolute; bottom:355px; right:40%;" type="submit" name="submit" value="Search" class="submit_3"/>
+				</form>
+			
+			</div>
+
+				
+				
+		
 			
 		
 		
@@ -104,7 +172,59 @@
 		
 		
 		
+		<script>
 		
+			
+			
+			function myFunction() {
+				var x = document.getElementById("highestrated");
+				if (x.style.display === "none") {
+					x.style.display = "block";
+				} else {
+					x.style.display = "none";
+				}
+			}
+			
+			function myFunctionOne() {
+				var x = document.getElementById("score");
+				
+				if (x.style.display === "none") {
+					x.style.display = "block";
+				} else {
+					x.style.display = "none";
+				}
+			}
+
+			var slideIndex = 1;
+			showSlides(slideIndex);
+
+			// Next/previous controls
+			function plusSlides(n) {
+			  showSlides(slideIndex += n);
+			}
+
+			// Thumbnail image controls
+			function currentSlide(n) {
+			  showSlides(slideIndex = n);
+			}
+
+			function showSlides(n) {
+			  var i;
+			  var slides = document.getElementsByClassName("mySlides");
+			  
+			  if (n > slides.length) {slideIndex = 1} 
+			  if (n < 1) {slideIndex = slides.length}
+			  for (i = 0; i < slides.length; i++) {
+				  slides[i].style.display = "none"; 
+			  }
+			  
+			  
+			  slides[slideIndex-1].style.display = "block"; 
+			  
+			} 
+		
+		
+		</script>
 
 		<style>
 		
@@ -238,6 +358,194 @@ ul#trending li a{
 ul#trending li:hover a {
 	color: #000000;
 }
+
+* {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: 19px;
+  margin-top: -22px;
+  margin-left: 415px;
+  padding: none;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.prev {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  color: #145ce2;
+}
+
+/* Caption text */
+.text {
+  color: black;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  margin-bottom: 85px;
+  left: -20px;
+  bottom: 8px;
+  width: 200%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* search box*/
+
+#search-form_3 {
+background: #e1e1e1; /* Fallback color for non-css3 browsers */
+width: 365px;
+margin: 100px auto;
+
+/* Gradients */
+background: -webkit-gradient( linear,left top, left bottom, color-stop(0, rgb(243,243,243)), color-stop(1, rgb(225,225,225)));
+background: -moz-linear-gradient( center top, rgb(243,243,243) 0%, rgb(225,225,225) 100%);
+
+/* Rounded Corners */
+border-radius: 17px;
+-webkit-border-radius: 17px;
+-moz-border-radius: 17px;
+
+/* Shadows */
+box-shadow: 1px 1px 2px rgba(0,0,0,.3), 0 0 2px rgba(0,0,0,.3);
+-webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.3), 0 0 2px rgba(0,0,0,.3);
+-moz-box-shadow: 1px 1px 2px rgba(0,0,0,.3), 0 0 2px rgba(0,0,0,.3);
+}
+
+/*** TEXT BOX ***/
+.search_3{
+background: #fafafa; /* Fallback color for non-css3 browsers */
+
+/* Gradients */
+background: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(250,250,250)), color-stop(1, rgb(230,230,230)));
+background: -moz-linear-gradient( center top, rgb(250,250,250) 0%, rgb(230,230,230) 100%);
+border: 0;
+border-bottom: 1px solid #fff;
+border-right: 1px solid rgba(255,255,255,.8);
+font-size: 16px;
+margin: 4px;
+padding: 5px;
+width: 250px;
+
+/* Rounded Corners */
+border-radius: 17px;
+-webkit-border-radius: 17px;
+-moz-border-radius: 17px;
+
+/* Shadows */
+box-shadow: -1px -1px 2px rgba(0,0,0,.3), 0 0 1px rgba(0,0,0,.2);
+-webkit-box-shadow: -1px -1px 2px rgba(0,0,0,.3), 0 0 1px rgba(0,0,0,.2);
+-moz-box-shadow: -1px -1px 2px rgba(0,0,0,.3), 0 0 1px rgba(0,0,0,.2);
+}
+
+/*** USER IS FOCUSED ON TEXT BOX ***/
+.search_3:focus{
+outline: none;
+background: #fff; /* Fallback color for non-css3 browsers */
+
+/* Gradients */
+background: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(255,255,255)), color-stop(1, rgb(235,235,235)));
+background: -moz-linear-gradient( center top, rgb(255,255,255) 0%, rgb(235,235,235) 100%);
+}
+
+/*** SEARCH BUTTON ***/
+.submit_3{
+background: #44921f;/* Fallback color for non-css3 browsers */
+/* Gradients */
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0, rgb(79,188,32)), color-stop(0.15, rgb(73,157,34)), color-stop(0.88, rgb(62,135,28)), color-stop(1, rgb(49,114,21)));
+background: -moz-linear-gradient( center top, rgb(79,188,32) 0%, rgb(73,157,34) 15%, rgb(62,135,28) 88%, rgb(49,114,21) 100%);
+border: 0;
+color: #eee;
+cursor: pointer;
+float: right;
+font: 16px 'Raleway', sans-serif;
+font-weight: bold;
+height: 30px;
+margin: 4px 4px 0;
+text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+width: 84px;
+outline: none;
+
+/* Rounded Corners */
+border-radius: 30px;
+-webkit-border-radius: 30px;
+-moz-border-radius: 30px;
+
+/* Shadows */
+box-shadow: -1px -1px 1px rgba(255,255,255,.5), 1px 1px 0 rgba(0,0,0,.4);
+-moz-box-shadow: -1px -1px 1px rgba(255,255,255,.5), 1px 1px 0 rgba(0,0,0,.2);
+-webkit-box-shadow: -1px -1px 1px rgba(255,255,255,.5), 1px 1px 0 rgba(0,0,0,.4);
+}
+/*** SEARCH BUTTON HOVER ***/
+.submit_3:hover {
+background: #4ea923; /* Fallback color for non-css3 browsers */
+
+/* Gradients */
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0, rgb(89,222,27)), color-stop(0.15, rgb(83,179,38)), color-stop(0.8, rgb(66,143,27)), color-stop(1, rgb(54,120,22)));
+background: -moz-linear-gradient( center top, rgb(89,222,27) 0%, rgb(83,179,38) 15%, rgb(66,143,27) 80%, rgb(54,120,22) 100%);
+}
+.submit_3:active {
+background: #4ea923; /* Fallback color for non-css3 browsers */
+
+/* Gradients */
+background: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(89,222,27)), color-stop(0.15, rgb(83,179,38)), color-stop(0.8, rgb(66,143,27)), color-stop(1, rgb(54,120,22)));
+background: -moz-linear-gradient( center bottom, rgb(89,222,27) 0%, rgb(83,179,38) 15%, rgb(66,143,27) 80%, rgb(54,120,22) 100%);
+}
+
+
 
 
 </style>

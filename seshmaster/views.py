@@ -5,12 +5,20 @@ from django.contrib.auth import authenticate
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from seshmaster.forms import signup_form, UserProfileForm
-
+from seshmaster.models import Nightclub
+from seshmaster.models import UserProfile
+from seshmaster.models import Image
 from django.contrib import auth
+from django.contrib.auth.models import User
+from django.db.models import Q
+
 def index(request):
 
-
-	return render(request, 'seshmaster/index.html')
+        club_list = Nightclub.objects.order_by('-average_score')[:3] 
+        context_dict = {'spots': club_list}
+        
+                
+        return render(request, 'seshmaster/index.html',context_dict)
 
 def contact(request):
 	
@@ -62,18 +70,6 @@ def login(request):
 	return render(request, 'seshmaster/login.html')
 	
 	
-def nightclubbrowse(request):
-	
-	
-	return render(request, 'seshmaster/nightclubbrowse.html')
-
-	
-def nightclubpage(request):
-	
-	
-	return render(request, 'seshmaster/nightclubbrowse/nightclubpage.html')
-	
-
 def leavereview(request):
 	
 	
@@ -144,7 +140,46 @@ def user_logout(request):
         auth.logout(request)
         return HttpResponseRedirect(reverse('index'))
 
-        
+def search(request):
+
+        if request.method == "GET":
+
+                query = request.GET.get("q")
+                submitbutton = request.GET.get("submit")
+
+                if query is not None:
+
+                        lookups= Q(name__icontains=query)| Q(average_score__icontains=query)
+                        results= Nightclub.objects.filter(lookups).distinct()
+                        context={"results":results,"submitbutton":submitbutton}
+
+                        return render(request,"seshmaster/search.html",context)
+                else:
+                        return render(request, "seshmaster/search.html")
+
+        else:
+                return render(request,"seshmaster/search.html")
+
+def search_img(request):
+
+        if request.method == "GET":
+
+                query = request.GET.get("q")
+                submitbutton = request.GET.get("submit")
+
+                if query is not None:
+
+                        lookups= Q(location__name__icontains=query)
+                        results= Image.objects.filter(lookups).distinct()
+                        context={"results":results,"submitbutton":submitbutton}
+
+                        return render(request,"seshmaster/search.html",context)
+                else:
+                        return render(request, "seshmaster/search.html")
+
+        else:
+                return render(request,"seshmaster/search.html")
 
 
-	
+
+               
