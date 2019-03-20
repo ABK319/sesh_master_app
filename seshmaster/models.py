@@ -39,16 +39,3 @@ class Image(models.Model):
 
 
 
-class Review(models.Model):
-
-    nightclub = models.ForeignKey(Nightclub)
-    user = models.ForeignKey(User) 
-    score = models.IntegerField()
-    Comment = models.CharField(max_length=350)
-
-    def __str__(self):
-        return self.score
-
-
-
-

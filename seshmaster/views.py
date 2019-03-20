@@ -64,36 +64,10 @@ def signup(request):
 	
 	
 	
-def login(request):
-	
-	
-	return render(request, 'seshmaster/login.html')
-	
-	
-def leavereview(request):
-	
-	
-	return render(request, 'seshmaster/nightclubbrowse/leavereview.html')
-	
+def about(request):
 
-def rateimage(request):
-	
-	
-	return render(request, 'seshmaster/nightclubbrowse/rateimage.html')
-	
+        return render(request, "seshmaster/about/html")
 
-def myaccount(request):
-	
-	
-	return render(request, 'seshmaster/myaccount.html')
-	
-	
-def myreviews(request):
-	
-	
-	return render(request, 'seshmaster/myaccount/myreviews.html')
-	
-	
 def addlocation(request):
 
         form = nightclub_form

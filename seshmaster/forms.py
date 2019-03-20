@@ -1,5 +1,5 @@
 from django import forms 
-from seshmaster.models import UserProfile,Image,Nightclub,Review
+from seshmaster.models import UserProfile,Image,Nightclub
 from django.contrib.auth.models import User 
 
 class nightclub_form(forms.ModelForm):
