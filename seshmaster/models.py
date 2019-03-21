@@ -31,7 +31,7 @@ class Nightclub(models.Model):
     price = models.CharField(max_length=128,help_text="Price range?")
     description = models.CharField(max_length=400,help_text="Little inside on what the place is like ;)")
     location = models.CharField(max_length=128,help_text="Where can people find this?")
-    average_score=models.IntegerField()
+    average_score=models.IntegerField(null=True)
     img = models.ImageField(upload_to='images', blank=True)
     
    

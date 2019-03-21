@@ -67,7 +67,7 @@
 			
 			<li><a href="#" onclick="myFunction()">Hottest Spots</a></li>
 			
-				<div id = "highestrated" style =  "position:absolute; bottom:400px; left:150px;">
+				<div id = "highestrated" style =  "position:absolute; top:275px; left:150px;">
 				{% if spots %}
 					<div class="slideshow-container">
 					
@@ -98,7 +98,7 @@
 				</div>
 			
 			<li><a  onclick="myFunctionOne()">Info</a></li>
-			<div id = "score" style = " display:none; position:absolute; bottom:300px; left:150px; font-family:comic sans ms">
+			<div id = "score" style = " display:none; position:absolute; top:175px; left:150px; font-family:comic sans ms">
 
 				{% if spots %}
 				
@@ -123,8 +123,8 @@
 				
 				<form id="search-form_3" action="/seshmaster/search/" method="GET" value="{{request.GET.q}}">
 				
-					<input style = "position:absolute; bottom:460px; right:40%" type="text" name="q" value="{{request.GET.q}}" placeholder="Search Spot by Name"class="search_3"/>
-					<input  style = "position:absolute; bottom:465px; right:40%;" type="submit" name="submit" value="Search" class="submit_3"/>
+					<input style = "position:absolute; top:500px; left:200px" type="text" name="q" value="{{request.GET.q}}" placeholder="Search Spot by Name"class="search_3"/>
+					<input  style = "position:absolute; top:500px; left:380px;" type="submit" name="submit" value="Search" class="submit_3"/>
 				</form>
 				
 			
@@ -233,8 +233,8 @@ h1{
 }
 
 	ul#Menu{
-		margin-left:-303px;
-		margin-top: 360px;
+		left:-460px;
+		margin-top: 520px;
 		background: #000000; 
 		box-shadow: 0px 0px 90px rgba(0,0,255,0.75);
 		padding: 0 10px;
@@ -354,6 +354,7 @@ ul#trending li:hover a {
 	color: #000000;
 }
 
+/*///////COPIED CSS//*/
 * {box-sizing:border-box}
 
 /* Slideshow container */

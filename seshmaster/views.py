@@ -66,7 +66,7 @@ def signup(request):
 	
 def about(request):
 
-        return render(request, "seshmaster/about/html")
+        return render(request, "seshmaster/about.html")
 
 def addlocation(request):
 
