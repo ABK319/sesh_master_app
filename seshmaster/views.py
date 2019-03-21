@@ -158,5 +158,9 @@ def search_img(request):
        
 
         return render(request,"seshmaster/images.html",context_dict)
+		
+def sitemap(request):
+
+	return render(request, "seshmaster/sitemap.html")
 
                
