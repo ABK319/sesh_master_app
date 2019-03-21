@@ -1,5 +1,5 @@
 from django import forms 
-from seshmaster.models import UserProfile,Image,Nightclub
+from seshmaster.models import UserProfile,Image,Nightclub,Review
 from django.contrib.auth.models import User 
 
 class nightclub_form(forms.ModelForm):
@@ -25,3 +25,8 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('picture',)
 
+class ReviewForm(forms.ModelForm):
+
+    class Meta:
+        model = Review
+        fields = ("score","description",)

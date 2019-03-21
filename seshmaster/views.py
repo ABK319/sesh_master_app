@@ -4,7 +4,7 @@ from seshmaster.forms import nightclub_form,signup_form
 from django.contrib.auth import authenticate
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from seshmaster.forms import signup_form, UserProfileForm
+from seshmaster.forms import signup_form, UserProfileForm,ReviewForm
 from seshmaster.models import Nightclub
 from seshmaster.models import UserProfile
 from seshmaster.models import Image
@@ -83,6 +83,22 @@ def addlocation(request):
                         print(form.errors)
 
         return render(request, 'seshmaster/addlocations.html',{'form': form})
+
+def review(request):
+
+        form = ReviewForm
+
+        if request.method == "POST":
+                form= ReviewForm(request.POST)
+
+                if form.is_valid():
+                        form.save(commit=True)
+                        return index(request)
+
+                else:
+                        print(form.errors)
+
+        return render(request, 'seshmaster/review.html',{'form': form})
 	
 def user_login(request):
 
@@ -134,26 +150,13 @@ def search(request):
         else:
                 return render(request,"seshmaster/search.html")
 
+
 def search_img(request):
 
-        if request.method == "GET":
+        img_list = Image.objects.all()
+        context_dict = {'imgs': img_list}
+       
 
-                query = request.GET.get("q")
-                submitbutton = request.GET.get("submit")
-
-                if query is not None:
-
-                        lookups= Q(location__name__icontains=query)
-                        results= Image.objects.filter(lookups).distinct()
-                        context={"results":results,"submitbutton":submitbutton}
-
-                        return render(request,"seshmaster/search.html",context)
-                else:
-                        return render(request, "seshmaster/search.html")
-
-        else:
-                return render(request,"seshmaster/search.html")
-
-
+        return render(request,"seshmaster/images.html",context_dict)
 
                

@@ -13,7 +13,7 @@
 			<a href="{% url 'index' %}">homepage</a><br />
 		{% else %}
 		<div style="font-family:comic sans ms">
-			<form id="user_form" method = "post" action= "/seshmaster/signup/" enctype="multipart/form-data">
+			<form id="user_form" method = "post" action="/seshmaster/signup/" enctype="multipart/form-data">
 				{%csrf_token%}
 				
 				{{user_form.as_p}}

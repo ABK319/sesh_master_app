@@ -11,6 +11,17 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+class Review(models.Model):
+
+    user = models.ForeignKey(User)
+
+    score = models.IntegerField(help_text="score from 0-5")
+    description = models.CharField(max_length=400, help_text="feel free to rant :)")
+    
+
+
+    def __str__(self):
+        return self.description
 
 
 class Nightclub(models.Model):
