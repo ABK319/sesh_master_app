@@ -5,12 +5,11 @@ from django.contrib.auth import authenticate
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from seshmaster.forms import signup_form, UserProfileForm,ReviewForm
-from seshmaster.models import Nightclub
-from seshmaster.models import UserProfile
-from seshmaster.models import Image
+from seshmaster.models import Nightclub,UserProfile,Image
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.db import models
 
 def index(request):
 
@@ -141,7 +140,11 @@ def search(request):
 
                         lookups= Q(name__icontains=query)| Q(average_score__icontains=query)
                         results= Nightclub.objects.filter(lookups).distinct()
-                        context={"results":results,"submitbutton":submitbutton}
+                        img_list = Image.objects.filter(nightclub__name__iexact = query)
+                        print(img_list)
+                        context={"results":results,"submitbutton":submitbutton,"img_list":img_list}
+                
+                        
 
                         return render(request,"seshmaster/search.html",context)
                 else:

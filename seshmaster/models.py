@@ -33,6 +33,7 @@ class Nightclub(models.Model):
     location = models.CharField(max_length=128,help_text="Where can people find this?")
     average_score=models.IntegerField(null=True)
     img = models.ImageField(upload_to='images', blank=True)
+
     
    
 
@@ -44,7 +45,7 @@ class Image(models.Model):
     
     user = models.ForeignKey(User)
     image = models.ImageField(upload_to='images', blank=True)
-    location = models.ForeignKey(Nightclub)
+    nightclub = models.ForeignKey(Nightclub)
     
     
 
