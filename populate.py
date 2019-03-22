@@ -6,6 +6,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sesh_master_app.settings')
 django.setup()
 from django.core.files.base import ContentFile
 from django.contrib.auth.models import User
+from django.contrib.auth.models import  UserManager
 from seshmaster.models import Nightclub
 
 
@@ -18,7 +19,7 @@ def populate():
 		"Price": ["£3", "£4.50", "$2.60", "$3", "£2.50"],
 		"Desc": ["filler text one", "filler text two", "filler text three", "filler text four", "filler text five"],
 		"Location": ["Argyle Street", "Cambell Lane", "Random Alley", "Forgotten Avenue", "Sauchiehall Street"],
-		"Score": ["3", "4", "5", "3", "4"],
+		"Score": [3, 4, 5, 3, 4],
 		"Image": []}
 		
 	users = {"User": ["seshlad420", "partygirl74", "SarahMathews12", "Carl Marks", "StevenAaron45"],
@@ -74,21 +75,31 @@ def add_club(Name, Music, Price, Desc, Location, Score, Image):
 	c.price=Price
 	c.description=Desc
 	c.location=Location
-	c.score=Score
-	c.image=Image
+	c.average_score=Score
+	c.img=Image
 	c.save()
 	
 	return c
 	
 	
-def add_user(Username, Email, Password, Image):
-	u = User.objects.get_or_create(username=Username)[0]
-	u.email=Email
-	u.password=Password
-	u.image=Image
+def add_user(Username, Email, Pass, Image):
+	u = User.objects.create_user(username=Username, email=Email, password=Pass)
 	
 	return(u)
-	
+	#User.objects.get_or_create(username=Username)[0]
+	#u.email=Email
+	#u.set_password=Pass
+	#u.picture=Image
 if __name__ == '__main__':
 	print("Starting population script...")
-	populate()
+	print("...")
+	try:
+		populate()
+	except:
+		print("=============Warning!=============")
+		print("Script was previously run.")
+		print("User and Nightclub data already ")
+		print("present in database.")
+		print("Cancelling script...")
+		print("=================================")
+		
