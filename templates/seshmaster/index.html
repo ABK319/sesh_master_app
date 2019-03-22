@@ -5,15 +5,16 @@
 
 		<title>Seshmaster</title> 
 		
+		
 
 	</head>
-	
-	<body> 
-	
 		
-	
-		<div style= "position:relative;left:60px; font-family:Impact; font-size:250%"> 
-		 
+	<body> 
+		<form action="/seshmaster/browse/">
+			<button class = "button button1" style = "position:absolute; left:700px; top:185px;" type="submit">Browse our Database</button>
+			<div style= "position:relative;left:60px; font-family:Impact; font-size:250%"> 
+		</form>
+			
 			SESHMASTER 
 			
 			{% if user.is_authenticated %} 
@@ -42,7 +43,7 @@
 		
 		
 
-		<
+		
 		
 		<div>
 			
@@ -127,8 +128,8 @@
 				
 				<form id="search-form_3" action="/seshmaster/search/" method="GET" value="{{request.GET.q}}">
 				
-					<input style = "position:absolute; top:500px; left:200px" type="text" name="q" value="{{request.GET.q}}" placeholder="Search Spot by Name"class="search_3"/>
-					<input  style = "position:absolute; top:500px; left:380px;" type="submit" name="submit" value="Search" class="submit_3"/>
+					<input style = "position:absolute; top:300px; left:700px" type="text" name="q" value="{{request.GET.q}}" placeholder="Search Spot by Name"class="search_3"/>
+					<input  style = "position:absolute; top:300px; left:880px;" type="submit" name="submit" value="Search" class="submit_3"/>
 				</form>
 				
 			
@@ -221,8 +222,9 @@
   cursor: pointer;
   width: 250px;
   
-  
-}
+ }
+ 
+ .button1 {background-color: #4CAF50;}
 
 
 	

@@ -13,7 +13,7 @@ from django.db import models
 
 def index(request):
 
-        club_list = Nightclub.objects.order_by('-average_score')[:3] 
+        club_list = Nightclub.objects.order_by('-average_score')[:3]
         context_dict = {'spots': club_list}
         
                 
@@ -165,5 +165,16 @@ def search_img(request):
 def sitemap(request):
 
 	return render(request, "seshmaster/sitemap.html")
+
+def browse_db(request):
+
+
+
+        db_list = Nightclub.objects.order_by("name")
+        context_dict = {"db_list":db_list}
+
+        return render(request, "seshmaster/browse_db.html",context_dict)
+
+
 
                

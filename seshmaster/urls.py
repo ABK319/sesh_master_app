@@ -15,6 +15,7 @@ url(r'addlocation/', views.addlocation, name='addlocation'),
 url(r'^logout/$', views.user_logout, name='logout'),
 url(r'^search/review/$', views.review, name='review'),
 url(r'^sitemap/', views.sitemap, name='sitemap'),
+url(r'^browse/', views.browse_db, name='browse'),
 #url(r'/', views., name=''),						#template line
 ]
 

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+
+<html>
+	<HEADER>
+    <h1 style = "font-family: Impact;">Locations </h1>
+</HEADER>
+<BODY>
+      {% if db_list %}
+	  <div style = "font-family: comic sans ms; font-size:150%">
+		
+		{% for db in db_list%}
+		<span style = " color:#63ed85; font-size:25px">&#10022;</span>
+		{{db.name}}<br><br>
+		{% endfor%}
+	</div>
+	{% else %}
+		currently nothing to show
+	{% endif %}  
+	
+	{% if user.is_authenticated %} 
+			<a href= "/seshmaster/addlocation"> Cant find your location? </a>
+	{%endif%}
+			
+			
+</BODY>
+</HTML>
